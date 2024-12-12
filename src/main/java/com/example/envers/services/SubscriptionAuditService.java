@@ -14,12 +14,12 @@ public class SubscriptionAuditService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List getAuditHistory(Long employeeId) {
+    public List getAuditHistory(Long subscriptionId) {
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
 
         return auditReader.createQuery()
                 .forRevisionsOfEntity(Subscription.class, false, true)
-                .add(AuditEntity.id().eq(employeeId))
+                .add(AuditEntity.id().eq(subscriptionId))
                 .getResultList();
     }
 }
